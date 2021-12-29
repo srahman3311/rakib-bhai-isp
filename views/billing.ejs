@@ -1,0 +1,36 @@
+<%- include("partials/app-header") -%>
+
+
+<table>
+    <tr>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Amount</th>
+        <th>Updated By</th>
+        <th>Updated On</th>
+    </tr>
+    user.billing.forEach(bill => {
+        <tr>
+            <td><%= bill.month %></td>
+            <td><%= bill.year %></td>
+            <td><%= bill.amount %></td>
+            <td><%= bill.updatedBy %></td>
+            <td><%= bill.updatedOn %></td>
+        </tr>
+    });
+</table>
+
+<button id="bill-update-button">Update Billing</button>
+
+<form id = "bill-update-form" action="/users/bill-update" method="POST">
+    <input type="hidden" value="<%= user._id %>">
+    <label for="month">Month</label>
+    <input type="text" name="month"> 
+    <label for="year">Year</label>
+    <input type="text" name="year"> 
+    <label for="amount">Amount</label>
+    <input type="text" name="amount"> 
+    <button type="submit">Post</button>
+</form>
+
+<%- include("partials/app-footer") -%>

@@ -1,0 +1,128 @@
+<%- include("partials/app-header") -%>
+
+<div class="user-details">
+    <div class="basic-info-container">
+        <div class="basic-info">
+            <div id="user-name">
+                <h1>User Details Of <%= user.fname %> <%= user.lname %> </h1>
+            </div>
+            <div id="other-details">
+                <table>
+                    <tr>
+                        <td style="font-weight: bold;"><p><span style="color: #0f4c75;">First Name</span></td>
+                        <td style="font-weight: bold;"><%= user.fname %></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;"><p><span style="color: #0f4c75;">Last Name</span></td>
+                        <td style="font-weight: bold;"><%= user.lname %></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;"><p><span style="color: #0f4c75;">Username</span></td>
+                        <td style="font-weight: bold;"><%= user.username %></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;"><p><span style="color: #0f4c75;">User ID</span></td>
+                        <td style="font-weight: bold;"><%= user.user_id %></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;"><p><span style="color: #0f4c75;">Phone</span></td>
+                        <td style="font-weight: bold;"><%= user.cellphone %></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;"><p><span style="color: #0f4c75;">Email</span></td>
+                        <td style="font-weight: bold;"><%= user.email %></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;"><p><span style="color: #0f4c75;">Status</span></td>
+                        <td style="font-weight: bold;"><%= user.status %></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;"><p><span style="color: #0f4c75;">Package</span></td>
+                        <td style="font-weight: bold;"><%= user.bought_package %></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="status-change">
+                <form class="change-status" action="/users/change-status/<%= user._id %>" method="POST">
+                    <input type="hidden" name="user" value=<%= user._id %>>
+                    <button class="status-change-buttons" id="change-user-status" type="submit">Change Status</button>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+    
+   
+    
+    <div class="bill-history">
+        <h2>Billing History</h2>
+       
+    </div>
+    <div class="user-bill-table">
+        <table>
+            <tr">
+                <th>Month</th>
+                <th>Year</th>
+                <th>Amount</th>
+                <th>Updated By</th>
+                <th>Updated On</th>
+                <th>Comments</th>
+            </tr>
+            <% user.billing.forEach(bill => { %>
+                <tr>
+                    <td><%= bill.month %></td>
+                    <td><%= bill.year %></td>
+                    <td><%= bill.amount %></td>
+                    <td><%= bill.updatedBy %></td>
+                    <td><%= bill.updatedOn %></td>
+                    <td><%= bill.comments %></td>
+                </tr>
+            <% }); %>
+        </table>
+    </div>
+   
+    
+    <div class = "bill-form-displayer">
+        <button class="bill-button">Add New Bill</button>
+    </div>
+    
+    
+    
+    <div class="form-container">
+        <div style ="display: none;" class = "bill-form">
+            <form class ="bill-update-form" onsubmit="return checkForm()" action="/users/update-billing/<%= user._id %>" method="POST">
+                <label for="month">Month</label> 
+                <select id = "month" name="month">
+                    <option value=""></option>
+                    <% months.forEach(month => { %>
+                        <option value="<%= month %>"><%= month %></option>
+                    <% }); %>
+                </select>
+                <p class = "form-validation-texts" id = "month-text" style="display: none; color: red;">Month is required</p>
+                <label for="year">Year</label> 
+                <select id = "year" name="year">
+                        <option value=""></option>
+                    <% years.forEach(year => { %>
+                        <option value="<%= year %>"><%= year %></option>
+                    <% }); %>
+                </select>
+                <p class = "form-validation-texts" id = "year-text" style="display: none; color: red;">Year is required</p>
+                <label for="amount">Amount</label>
+                <input id = "amount" type="text" name="amount">
+                <p class = "form-validation-texts" id ="amount-text" style="display: none; color: red;">Amount is required</p>
+                <label for="comments">Comments</label>
+                <input id = "comment" type="text" name="comments">
+                <p class = "form-validation-texts" id = "comment-text" style="display: none; color: red;">comment is required</p>
+                <button id = "bill-button-single" class="bill-button" type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<%- include("partials/app-footer") -%>

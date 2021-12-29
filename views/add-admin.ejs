@@ -1,0 +1,59 @@
+<%- include("partials/app-header") -%>
+
+<div class="main-forms">
+    <div class="reg-login-forms">
+        <div class="form-header">
+            <h1>Admin Details</h1>
+        </div>
+        <div class="form-contents">
+            <form action="/admins/add-admin" method="POST">
+                <div class="form-content-divs">
+                    <label for= "fname" >First Name</label>
+                    <input type = "text" name = "fname" value = <%= typeof fname !== "undefined" ? fname : "" %>>
+                </div>
+              
+                <div class="form-content-divs">
+                    <label for= "lname" >Last Name</label>
+                    <input type = "text" name = "lname" value = <%= typeof lname !== "undefined" ? lname : "" %>>          
+                </div>
+
+                <div class="form-content-divs">
+                    <label for= "email" >Email</label>
+                    <input type = "email" name = "email" value = <%= typeof email !== "undefined" ? email : "" %>>
+                </div>
+
+                <div class="form-content-divs">
+                    <label for= "username" >Username</label>
+                    <input type = "text" name = "username" value = <%= typeof username !== "undefined" ? username : "" %>>
+                </div>
+                
+                <div class="form-content-divs">
+                    <label for= "joiningDate" >Joining Date</label>
+                    <input type = "text" name = "joiningDate" value = <%= typeof date !== "undefined" ? date : "" %>>         
+                </div>
+                
+                <div class="form-content-divs">
+                    <label for= "password" >Password</label>
+                    <input type = "password" name = "password" value = <%= typeof password !== "undefined" ? password : "" %>>
+                </div>
+               
+                <div class="form-content-divs">
+                    <label for= "password" >Confirm Password</label>
+                    <input type = "password" name = "password2" value = <%= typeof password2 !== "undefined" ? password2 : "" %>>
+                </div>
+
+                <div class="form-button-divs">
+                    <button class="reg-login-button" type="submit">Register</button>
+                </div>
+               
+            </form>
+        </div>
+        
+    </div>
+
+</div>
+
+
+
+
+<%- include("partials/app-footer") -%>

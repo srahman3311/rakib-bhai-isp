@@ -1,0 +1,8 @@
+<% if(typeof errors !== "undefined") { %>
+    <% errors.forEach(error => { %>
+        <div class="dismissible-alert">
+            <p class="dismissible-content"><%= error.message %></p>
+            <button class="dismissible-button">&times;</button>
+        </div>
+    <% }); %>
+<% } %>

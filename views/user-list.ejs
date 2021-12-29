@@ -1,0 +1,100 @@
+<%- include("partials/app-header") -%>
+
+<div class="list" id = "user-list">
+
+    
+
+    <!--div for housing add user route and user search form-->
+    <div class="list-other">
+        <a href="/users/add-user">Add User</a>
+        <form class="search-forms" action="/users/user-list" method="POST">
+            <input type="text" name="searchValue" placeholder="Find A User" autocomplete="off">
+            <button class="search-buttons" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+
+    <!--user list header-->
+    <div class="list-header">
+        <h2>User List</h2>
+    </div>
+
+    
+    <!-- table for displaying all user data-->
+    <div class="list-table">
+        <div id="user-table">
+            <table>
+                <tr>
+                    <!-- User Billing Data Mass Update Checkbox-->
+                    <th id = "select-all-header">
+                        <input id = "select-all" type="checkbox">
+                    </th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Mobile No.</th>
+                    <th>Address</th>
+                    <th>Package</th>
+                    <th>Last paid bill</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                </tr>
+                <% users.forEach(user => { %>
+                    <tr>
+                         <!-- User Billing Data Mass Update Checkbox-->
+                        <td>
+                            <input class="select-one" type="checkbox" value= "<%= user.user_id %>">
+                        </td>
+                        <td><%= user.fname %> <%= user.lname %></td>
+                        <td><%= user.username %></td>
+                        <td><%= user.cellphone %></td>
+                        <td><%= user.address.city %></td>
+                        <td><%= user.bought_package %></td>
+                        <td><%= user.billing[user.billing.length - 1].month %>-<%= user.billing[user.billing.length - 1].year %></td>
+                        <td><%= user.status %></td>
+                        <td><a href = "/users/user/<%= user._id %>">See Full Details</a></td>
+                    </tr>
+                <% }); %>
+            </table>
+        </div>
+        
+    </div>
+
+    <div class="bill-form-displayer" >
+        <button id="mass-bill-form-displayer" class="bill-button">Update</button>
+    </div>
+
+
+    <div class="form-container">
+        <div style ="display: none;" class = "bill-form" id = "bill-form-mass">
+            <form id = "bill-update-form" onsubmit="return checkForm()" action="/users/update-billing" method="POST">
+                <input type="hidden" id="hidden-input" name="userData">
+                <label for="month">Month</label> 
+                <select id = "month" name="month">
+                    <option value=""></option>
+                    <% months.forEach(month => { %>
+                        <option value="<%= month %>"><%= month %></option>
+                    <% }); %>
+                </select>
+                <p class = "form-validation-texts" id = "month-text" style="display: none; color: red;">Month is required</p>
+                <label for="year">Year</label> 
+                <select id = "year" name="year">
+                        <option value=""></option>
+                    <% years.forEach(year => { %>
+                        <option value="<%= year %>"><%= year %></option>
+                    <% }); %>
+                </select>
+                <p class = "form-validation-texts" id = "year-text" style="display: none; color: red;">Year is required</p>
+                <label for="amount">Amount</label>
+                <input id = "amount" type="text" name="amount">
+                <p class = "form-validation-texts" id ="amount-text" style="display: none; color: red;">Amount is required</p>
+                <label for="comments">Comments</label>
+                <input id = "comment" type="text" name="comments">
+                <p class = "form-validation-texts" id = "comment-text" style="display: none; color: red;">comment is required</p>
+                <button id = "bill-button-mass" class="bill-button" type="submit">Mass Update</button>
+            </form>
+        </div>
+    </div>
+
+    
+</div>
+
+<%- include("partials/app-footer") -%>

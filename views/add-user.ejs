@@ -1,0 +1,108 @@
+<%- include("partials/app-header") -%>
+
+<div class="main-forms">
+    <div class="reg-login-forms">
+        <div class="form-header">
+            <h1>User Details</h1>
+            <%- include("partials/messages") -%>
+        </div>
+       
+        <div class="form-contents">
+            <form id = "user-entry" action="/users/add-user" method="POST">
+                <!--Connection Type-->
+                <div class="form-content-divs radio-button-divs" id="connection-type">
+                    <h2>Select a connection type</h2>
+                    <input type="radio" value="New" name="connectiontType">
+                    <label for="new">New</label>
+                    <input type="radio" value="Shifting" name="connectiontType">
+                    <label for="shifting">Shifting</label>
+                </div>
+
+                  <!--Personal Information-->
+                <div class="form-content-divs" id="personal-info">
+                    <h2>Personal Information</h2>
+                    <label for="fname">First Name</label>
+                    <input type="text" name="fname">
+                    <label for="lname">Last Name</label>
+                    <input type="text" name="lname">
+                    <label for="username">Username</label>
+                    <input type="text" name="username">
+                    <label for="email">Email</label>
+                    <input type="email" name="email">
+                    <label for="cellphone">Cellphone Number</label>
+                    <input type="text" name="cellphone">
+                </div>
+
+                 <!--Full Address-->
+                <div class="form-content-divs" id="address">
+                    <h2>Address</h2>
+                    <label for="house-street">House/Street</label>
+                    <input type="text" name="house_street">
+                    <label for="city">City</label>
+                    <input type="text" name="city">
+                    <label for="zipcode">Zip Code</label>
+                    <input type="text" name="zipCode">
+                </div>
+
+                 <!--Gender Information-->
+                <div class="form-content-divs radio-button-divs" id="gender">
+                    <h2>Select a gender</h2>
+                    <input type="radio" value="Male" name="gender">
+                    <label for="male">Male</label>
+                    <input type="radio" value="Female" name="gender">
+                    <label for="female">Female</label>
+                    <input type="radio" value="Other" name="gender">
+                    <label for="neutal">Other</label>
+                </div>
+
+                 <!--Package Information-->
+                <div class="form-content-divs" id="package-info">
+                    <h2>Select a package</h2>
+                    <select name="package">
+                        <option value="Starter - 5 mbps - 600 Taka">Starter - 5 mbps - 600 Taka</option>
+                        <option value="Intermediate - 8 mbps - 800 Taka">Intermediate - 8 mbps - 800 Taka</option>
+                        <option value="Boss - 12 mbps - 1000 Taka">Boss - 12 mbps - 1000 Taka</option>
+                    </select>
+                </div>
+
+                 <!--Bill Information-->
+                <div class="form-content-divs" id="bill-info">
+                    <h2>Starting month's bll information</h2>
+                    <label for="month">Month</label> 
+                    <select name="month">
+                        <option value=""></option>
+                        <% months.forEach(month => { %>
+                            <option value="<%= month %>"><%= month %></option>
+                        <% }); %>
+                    </select>
+        
+                    <label for="year">Year</label> 
+                    <select name="year">
+                            <option value=""></option>
+                        <% years.forEach(year => { %>
+                            <option value="<%= year %>"><%= year %></option>
+                        <% }); %>
+                    </select>
+                    <label for="amount">Amount</label>
+                    <input type="text" name="amount">
+                    <label for="comments">Comments</label>
+                    <input type="text" name="comments">
+                </div>
+
+                <div class="form-button-divs">
+                    <button class="reg-login-button" type="submit">Add</button>
+                </div>
+                
+                
+
+            </form>
+
+        </div>
+        
+    </div>
+
+    
+</div>
+
+
+<%- include("partials/app-footer") -%>

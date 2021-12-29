@@ -1,0 +1,59 @@
+<%- include("partials/app-header") -%>
+
+<div class="list">
+
+
+    <!--div for housing add admin route and admin search form-->
+    <div class="list-other">
+        <a href="/admins/add-admin">Add Admin</a>
+        <form class="search-forms" action="/admins/admin-list" method="POST">
+            <input type="text" name="searchValue" placeholder="Find An Admin" autocomplete="off">
+            <button class="search-buttons" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+
+
+    
+    <!--admin list header-->
+    <div class="list-header">
+        <h2>Admin List</h2>
+    </div>
+
+  
+
+    <!-- table for displaying all admin data-->
+    <div class="list-table">
+        <div id="admin-table">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Joining Date</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                    <th>Update</th>
+                </tr>
+                <% admins.forEach(admin => { %>
+                    <tr>
+                        <td><%= admin.fname %> <%= admin.lname %></td>
+                        <td><%= admin.username %></td>
+                        <td><%= admin.email %></td>
+                        <td><%= admin.joiningDate %></td>
+                        <td><%= admin.status %></td>
+                        <td><a href = "/admins/single-admin/<%= admin._id %>">See Details</a></td>
+                        <td>
+                            <form class="change-status" action="/admins/change-status/<%= admin._id %>" method="POST">
+                                <input type="hidden" name="admin" value=<%= admin._id %>>
+                                <button class="status-change-buttons" type="submit">Change Status</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+<%- include("partials/app-footer") -%>
